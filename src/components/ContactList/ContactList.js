@@ -1,7 +1,7 @@
 import { selectContacts, selectError, selectFilter, selectVisibleContacts } from "../../redux/selectors";
 import { AllContacts, Contact, Span, Button } from "./ContactList.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteContacts, getContacts } from "../../redux/operations";
+import { deleteContacts, getContacts } from "../../redux/contacts/operations";
 import { useEffect } from "react";
 import toast from 'react-hot-toast';
 

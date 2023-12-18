@@ -4,7 +4,7 @@ import { Field, Form, ErrorMessage, Label, Button } from './ContactForm.styled'
 import { useDispatch, useSelector } from 'react-redux';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { selectContacts, selectIsLoading } from '../../redux/selectors';
-import { addNewContact } from '../../redux/operations';
+import { addNewContact } from '../../redux/contacts/operations';
 
 const schema = Yup.object().shape({
     name: Yup.string().min(3, "Too short").required('Required'),
