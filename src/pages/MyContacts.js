@@ -1,24 +1,43 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContactList } from '../components/ContactList/ContactList';
-import { fetchTasks } from 'redux/tasks/operations';
-import { selectLoading } from 'redux/tasks/selectors';
-import { ContactForm } from 'components/ContactForm/ContactForm';
+import { selectIsLoading, selectContacts, selectError } from '../redux/selectors';
+import { ContactForm } from '../components/ContactForm/ContactForm';
+import { getContacts } from '../redux/contacts/operations';
+import { MutatingDots } from "react-loader-spinner";
+import { Toaster } from "react-hot-toast";
+import { Filter } from '../components/Filter/Filter';
 
-export default function Tasks() {
+export default function Contcts() {
     const dispatch = useDispatch();
-    const isLoading = useSelector(selectLoading);
-
+    const isLoading = useSelector(selectIsLoading);
+    const contacts = useSelector(selectContacts);
+    const error = useSelector(selectError);
+    
     useEffect(() => {
-        dispatch(fetchTasks());
+        dispatch(getContacts());
     }, [dispatch]);
 
     return (
         <>
-        <title>Your tasks</title>
+        <title>Phonebook</title>
         <ContactForm />
-        <div>{isLoading && 'Request in progress...'}</div>
+        <title>Contacts</title>
+        {contacts.length > 0 ? <Filter/>
+        : (!error && !isLoading && <p>You don't have any contacts</p>) }
         <ContactList />
+        {isLoading && <MutatingDots 
+            height="100"
+            width="100"
+            color="#4fa94d"
+            secondaryColor= '#4fa94d'
+            radius='12.5'
+            ariaLabel="mutating-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+        />}
+        <Toaster position="top-right"/>
         </>
     );
 }
