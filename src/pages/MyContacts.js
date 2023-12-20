@@ -1,22 +1,15 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ContactList } from '../components/ContactList/ContactList';
 import { selectIsLoading, selectContacts, selectError } from '../redux/selectors';
 import { ContactForm } from '../components/ContactForm/ContactForm';
-import { getContacts } from '../redux/contacts/operations';
 import { MutatingDots } from "react-loader-spinner";
 import { Toaster } from "react-hot-toast";
 import { Filter } from '../components/Filter/Filter';
 
 export default function Contcts() {
-    const dispatch = useDispatch();
     const isLoading = useSelector(selectIsLoading);
     const contacts = useSelector(selectContacts);
     const error = useSelector(selectError);
-    
-    useEffect(() => {
-        dispatch(getContacts());
-    }, [dispatch]);
 
     return (
         <>

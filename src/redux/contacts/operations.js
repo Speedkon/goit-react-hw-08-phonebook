@@ -6,8 +6,8 @@ export const getContacts = createAsyncThunk(
     async (_, {rejectWithValue}) => {
 
         try {
-            const contacts = await axios.get("/contacts");
-            return contacts;
+            const {data} = await axios.get("/contacts");
+            return data;
 
         } catch (error) {
             return rejectWithValue(error.message);
