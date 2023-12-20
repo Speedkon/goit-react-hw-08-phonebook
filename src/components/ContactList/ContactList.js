@@ -1,9 +1,9 @@
 import { selectContacts, selectError, selectFilter, selectVisibleContacts } from "../../redux/selectors";
-import { AllContacts, Contact, Span, Button } from "./ContactList.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContacts, getContacts } from "../../redux/contacts/operations";
 import { useEffect } from "react";
 import toast from 'react-hot-toast';
+import { Box, Text, WrapItem, Button, Wrap } from '@chakra-ui/react'
 
 export const ContactList = () => {
     const dispatch = useDispatch();
@@ -32,18 +32,20 @@ export const ContactList = () => {
     }
 
     return (
-        <AllContacts>
+        <Box w='400px'>
             {visibleContacts.map(contact => {
                 const {id, name, number} = contact;
 
                     return (
-                        <Contact key={id}>
-                            <Span>{name}:</Span>
-                            <Span>{number}</Span>
-                            <Button type='button' onClick={() => onDelete(id)}>Delete</Button>
-                        </Contact>
+                        <Wrap key={id} marginBottom="4px" justify="space-between">
+                            <WrapItem alignItems="center" >
+                                <Text marginRight="10px">{name}:</Text>
+                                <Text>{number}</Text>
+                            </WrapItem>
+                            <Button colorScheme='teal' size='sm' type='button' onClick={() => onDelete(id)}>Delete</Button>
+                        </Wrap>
                     )
                 })}
-        </AllContacts>
+        </Box>
     )
 };

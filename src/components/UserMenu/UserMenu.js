@@ -1,15 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auth/operations';
-// import css from './UserMenu.module.css';
+import { Button} from '@chakra-ui/react'
 
 export const UserMenu = () => {
     const dispatch = useDispatch();
 
     return (
         <div>
-        <button type="button" onClick={() => dispatch(logOut())}>
+        <Button colorScheme='teal' type="button" onClick={() => dispatch(logOut())}>
             Logout
-        </button>
+        </Button>
         </div>
     );
 };
