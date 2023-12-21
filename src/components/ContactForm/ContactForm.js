@@ -1,10 +1,11 @@
-import { Formik, ErrorMessage} from 'formik';
+import { Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { selectContacts, selectIsLoading } from '../../redux/selectors';
 import { addNewContact } from '../../redux/contacts/operations';
-import { Box, Input, FormLabel, Button } from '@chakra-ui/react'
+import { Box, FormLabel, Button } from '@chakra-ui/react'
+import { Error, Input } from './ContactForm.styled';
 
 const schema = Yup.object().shape({
     name: Yup.string().min(3, "Too short").required('Required'),
@@ -37,19 +38,19 @@ export const ContactForm = () => {
         >
 
             <Box bg="white" p={8} rounded="md" w='300px'>
-                <form autoComplete="off">
+                <Form autoComplete="off">
                     <FormLabel marginRight="0" htmlFor="name">
                         Name
                             <Input type="text" name="name" id="name" placeholder="New contact"/>
-                            <ErrorMessage name="name" component="p"/>
+                            <Error name="name" component="p"/>
                     </FormLabel>
                     <FormLabel marginRight="0" htmlFor="number">
                         Number
                             <Input type="tel" name="number" id="number" placeholder="Enter a number"/>
-                            <ErrorMessage name="number" component="p"/>
+                            <Error name="number" component="p"/>
                     </FormLabel>
                     <Button colorScheme='teal' width="100%" marginTop="10px" type="submit" disabled={isLoading}>Add contact</Button>
-                </form>
+                </Form>
             </Box>
         </Formik>
     )

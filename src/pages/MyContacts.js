@@ -5,7 +5,7 @@ import { ContactForm } from '../components/ContactForm/ContactForm';
 import { MutatingDots } from "react-loader-spinner";
 import { Toaster } from "react-hot-toast";
 import { Filter } from '../components/Filter/Filter';
-import { Heading } from '@chakra-ui/react'
+import { Heading, Box } from '@chakra-ui/react'
 
 export default function Contcts() {
     const isLoading = useSelector(selectIsLoading);
@@ -13,13 +13,17 @@ export default function Contcts() {
     const error = useSelector(selectError);
 
     return (
-        <>
-        <Heading fontSize='24px' color='teal'>Phonebook</Heading>
-        <ContactForm />
-        <Heading fontSize='24px' color='teal' >Contacts</Heading>
-        {contacts.length > 0 ? <Filter/>
-        : (!error && !isLoading && <p>You don't have any contacts</p>) }
-        <ContactList />
+        <Box display='flex' gap="40px">
+        <Box>
+            <Heading fontSize='24px' color='teal'>Phonebook</Heading>
+            <ContactForm />
+        </Box>
+        <Box>
+            <Heading fontSize='24px' color='teal' >Contacts</Heading>
+            {contacts.length > 0 ? <Filter/>
+            : (!error && !isLoading && <p>You don't have any contacts</p>) }
+            <ContactList />
+        </Box>
         {isLoading && <MutatingDots 
             height="100"
             width="100"
@@ -32,6 +36,6 @@ export default function Contcts() {
             visible={true}
         />}
         <Toaster position="top-right"/>
-        </>
+        </Box>
     );
 }

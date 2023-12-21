@@ -1,6 +1,7 @@
 import { updateFilter } from '../../redux/filterSlice';
 import { useDispatch } from "react-redux";
-import { Input, FormLabel} from '@chakra-ui/react'
+import { Input} from "./Filter.styled"
+import { FormLabel } from '@chakra-ui/react'
 
 export const Filter = () => {
     const dispatch = useDispatch();
